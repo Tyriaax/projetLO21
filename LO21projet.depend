@@ -1,18 +1,25 @@
 # depslib dependency file v1.0
-1546205110 source:c:\program files\git\lo21projet\main.c
+1546212194 source:c:\program files\git\lo21projet\main.c
 	<stdio.h>
 	<stdlib.h>
+	"structure.h"
+	"constante.h"
+	"individu.h"
+	"time.h"
 
-1546206743 source:c:\program files\git\lo21projet\individu.c
+1546212149 source:c:\program files\git\lo21projet\individu.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	<time.h>
 	"structure.h"
 	"constante.h"
+	"individu.h"
 
 1546205110 c:\program files\git\lo21projet\structure.h
 	"constante.h"
 
 1546203491 c:\program files\git\lo21projet\constante.h
+
+1546212221 c:\program files\git\lo21projet\individu.h
 

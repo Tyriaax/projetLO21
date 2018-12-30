@@ -8,8 +8,6 @@
 
 Individu initIndivIterative(Individu indiv)
 {
-    srand(time(0));
-
     int i;
     for(i=0;i<longIndiv;i++)
     {
@@ -24,7 +22,17 @@ Individu initIndivRecursive(Individu indiv,int nombreRestant)
     if(nombreRestant!=0)
     {
         indiv.bit[longIndiv-nombreRestant]=rand()%2;
-        initIndivRecursive(indiv,nombreRestant-1);
+        indiv=initIndivRecursive(indiv,nombreRestant-1);
     }
     return indiv;
+}
+
+int valeurIndividu(Individu indiv)
+{
+    int i,valeur=0;
+    for(i=0;i<longIndiv;i++)
+    {
+        valeur+=indiv.bit[longIndiv-1-i]*pow(2,i);
+    }
+    return valeur;
 }

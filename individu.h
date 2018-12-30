@@ -3,5 +3,6 @@
 
 Individu initIndivIterative(Individu);
 Individu initIndivRecursive(Individu,int);
+int valeurIndividu(Individu);
 
 #endif // INDIVIDU_H_INCLUDED
