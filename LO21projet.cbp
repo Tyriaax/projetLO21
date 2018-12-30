@@ -32,6 +32,10 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="constante.h" />
+		<Unit filename="individu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="individu.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "structure.h"
+#include "constante.h"
+#include "individu.h"
 
 int main()
 {
-  ///nique ta mere Louis
     return 0;
 }

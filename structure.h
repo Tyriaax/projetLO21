@@ -5,6 +5,6 @@
 typedef struct Individu
 {
     unsigned int bit[longIndiv];
-}
+}Individu;
 
 #endif // STRUCTURE_H_INCLUDED
