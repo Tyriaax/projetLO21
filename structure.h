@@ -13,3 +13,11 @@ typedef struct elementIndiv
 typedef elementIndiv* Individu;
 
 #endif // STRUCTURE_H_INCLUDED
+
+typedef struct elementPopul
+{
+    Individu indiv;
+    struct elementPopul* suivant;
+}elementPopul;
+
+typedef elementPopul* Population;
