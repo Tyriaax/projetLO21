@@ -6,7 +6,7 @@
 #include "constante.h"
 #include "individu.h"
 
-Individu initIndivIterative(Individu indiv)
+/*Individu initIndivIterative(Individu indiv)
 {
     int i;
     for(i=0;i<longIndiv;i++)
@@ -15,9 +15,9 @@ Individu initIndivIterative(Individu indiv)
     }
 
     return indiv;
-}
+}*/
 
-Individu initIndivRecursive(Individu indiv,int nombreRestant)
+/*Individu initIndivRecursive(Individu indiv,int nombreRestant)
 {
     if(nombreRestant!=0)
     {
@@ -25,9 +25,9 @@ Individu initIndivRecursive(Individu indiv,int nombreRestant)
         indiv=initIndivRecursive(indiv,nombreRestant-1);
     }
     return indiv;
-}
+}*/
 
-int valeurIndividu(Individu indiv)
+/*int valeurIndividu(Individu indiv)
 {
     int i,valeur=0;
     for(i=0;i<longIndiv;i++)
@@ -35,4 +35,4 @@ int valeurIndividu(Individu indiv)
         valeur+=indiv.bit[longIndiv-1-i]*pow(2,i);
     }
     return valeur;
-}
+}*/

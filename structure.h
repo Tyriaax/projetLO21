@@ -2,9 +2,14 @@
 #define STRUCTURE_H_INCLUDED
 #include "constante.h"
 
-typedef struct Individu
+typedef unsigned char Bit;
+
+typedef struct elementIndiv
 {
-    unsigned int bit[longIndiv];
-}Individu;
+    Bit bit;
+    struct elementIndiv* suivant;
+}elementIndiv;
+
+typedef elementIndiv* Individu;
 
 #endif // STRUCTURE_H_INCLUDED
