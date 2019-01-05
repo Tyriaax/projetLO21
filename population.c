@@ -23,8 +23,9 @@ Population* creationPop(void)
     elementPop -> suivant = NULL;
     listePop -> premier = elementPop;
      // printf("\td : qualite : %f, valeur : %d \n", elementPop->qualite, elementPop->valeur);
+    int i;
 
-    for(int i = 1; i < taillePopulation; i++)
+    for(i = 1; i < taillePopulation; i++)
     {
         elementPop1->Personne = creation_indiv();
        // afficherListe(elementPop1->Personne, i + 1);

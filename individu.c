@@ -19,7 +19,8 @@ Liste* creation_indiv()
     element -> suivant = NULL;
     liste -> premier = element;
 
-    for(int i = 0; i <= longIndiv - 2 ; i ++)
+    int i;
+    for(i = 0; i <= longIndiv - 2 ; i ++)
     {
         int nbAleatoire = rand()%2;
         ajoutDebut(liste, nbAleatoire);
@@ -140,7 +141,8 @@ Liste* croisageListe (Liste *parent1, Liste *parent2)
         exit(EXIT_FAILURE);
     }
 
-    for(int i = 0; i<= longIndiv -1; i++)
+    int i;
+    for(i = 0; i<= longIndiv -1; i++)
     {
         int nbAlea = rand()%2;
 
