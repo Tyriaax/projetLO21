@@ -20,7 +20,7 @@ IndivPop* Diviser(IndivPop *head, IndivPop *end, IndivPop **newHead, IndivPop **
     while(cur != pivot)
     {
         printf("%f      %f\n", cur->qualite, pivot->qualite);
-        if(cur->qualite < pivot->qualite)
+        if(cur->qualite > pivot->qualite)
         {
             if(((*newHead)) == NULL)
             {
@@ -58,7 +58,6 @@ IndivPop *quickSortRecur(IndivPop *head, IndivPop *end)
 
     IndivPop *pivot = Diviser(head, end, &newHead,&newEnd);
 
-    printf("%d", newHead);
     if(newHead != pivot)
     {
         IndivPop *tmp = newHead;
@@ -76,12 +75,8 @@ IndivPop *quickSortRecur(IndivPop *head, IndivPop *end)
     return newHead;
 }
 
-void quickSort(Population *headRef)
+void quickSort(Population **headRef)
 {
-    IndivPop *point = malloc(sizeof(IndivPop));
 
-    point = headRef->premier;
-
-    (point) = quickSortRecur(point,getTail(point));
-    return;
+    (*headRef) = quickSortRecur(*headRef,getTail(*headRef));
 }

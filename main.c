@@ -13,6 +13,6 @@ int main()
     afficherPop(maPop2);
     quickSort(maPop2);
     afficherPop(maPop2);
-    afficherPop(maPop2);
+
     return 0;
 }
