@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="LO21projet" />
+		<Option title="FinalProjetLo21" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/LO21projet" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/FinalProjetLo21" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/LO21projet" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/FinalProjetLo21" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -31,15 +31,21 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="constante.h" />
-		<Unit filename="individu.c">
+		<Unit filename="Individu.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="individu.h" />
+		<Unit filename="Individu.h" />
+		<Unit filename="Population.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Population.h" />
+		<Unit filename="Quicksort.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="structure.h" />
+		<Unit filename="quicksort.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

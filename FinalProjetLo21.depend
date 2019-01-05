@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1546439565 source:c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Individu.h"
+	"Population.h"
+
+1546382987 source:c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\individu.c
+	<stdio.h>
+	<stdlib.h>
+	"Individu.h"
+	<math.h>
+
+1546211004 c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\individu.h
+
+1546386897 source:c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\population.c
+	<stdio.h>
+	<stdlib.h>
+	"population.h"
+	<time.h>
+
+1546384288 c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\population.h
+	"Individu.h"
+
+1546441023 source:c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\quicksort.c
+	"Quicksort.h"
+	<stdio.h>
+	<stdlib.h>
+	"population.h"
+
+1546264872 c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\quicksort.h
+

@@ -1,50 +1,86 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "structure.h"
-#include "constante.h"
 #include "population.h"
-#include "individu.h"
+#include <time.h>
 
-Population initPopul()
+Population* creationPop(void)
 {
-    int taillePopul=rand()%181+20;
+    Population *listePop = malloc(sizeof(*listePop)); //contient l'adresse du 1er indiv de la pop
+    IndivPop *elementPop = malloc(sizeof(IndivPop));
+    IndivPop *elementPop1 = malloc(sizeof(IndivPop));
 
-    elementPopul *elemPopul = malloc(sizeof(elementPopul));
-    elemPopul->indiv=initIndivIterative();
-    elemPopul->suivant=NULL;
+    int taillePopulation = 5;//rand()%(201 - 20) + 20;
 
-    int i;
-    for(i=0;i<taillePopul-1;i++)
+    if(listePop == NULL || elementPop == NULL || elementPop1 == NULL)
     {
-        elementPopul *nouvElPopul = malloc(sizeof(elementPopul));
-
-        nouvElPopul->indiv=initIndivIterative();
-        nouvElPopul->suivant=elemPopul;
-
-        elemPopul = nouvElPopul;
+        exit(EXIT_FAILURE);
     }
 
-    return elemPopul;
+    elementPop->Personne = creation_indiv();
+   // afficherListe(elementPop->Personne,1);
+    elementPop->valeur = decodageListe(elementPop->Personne);
+    elementPop->qualite = qualiteIndiv(elementPop ->valeur);
+    elementPop -> suivant = NULL;
+    listePop -> premier = elementPop;
+     // printf("\td : qualite : %f, valeur : %d \n", elementPop->qualite, elementPop->valeur);
+
+    for(int i = 1; i < taillePopulation; i++)
+    {
+        elementPop1->Personne = creation_indiv();
+       // afficherListe(elementPop1->Personne, i + 1);
+        elementPop1 ->valeur = decodageListe(elementPop1->Personne);
+        elementPop1->qualite = qualiteIndiv(elementPop1 ->valeur);
+       // printf("\td : qualite : %f, valeur : %d \n", elementPop1->qualite, elementPop1->valeur);
+        ajoutDebutPop(listePop, elementPop1->Personne, elementPop1 ->valeur, elementPop1->qualite);
+    }
+
+    return listePop;
 }
 
-Population selection(Population popul, int tselect)
+void ajoutDebutPop(Population *maPop, Liste *adresseIndiv, int val, double qual)
 {
-    if(popul==NULL)
+    IndivPop *nouveau = malloc(sizeof(*nouveau));
+    if(maPop == NULL || nouveau == NULL)
     {
-        return NULL;
+        exit(EXIT_FAILURE);
     }
-    elementPopul elMemoire;
-    elMemoire->suivant=NULL;
-    Population memoire;
+    nouveau-> Personne = adresseIndiv;
+    nouveau->valeur = val;
+    nouveau->qualite = qual;
+    nouveau-> suivant = maPop->premier;
+    maPop-> premier = nouveau;
+}
 
-    elementPopul elemPopul = *popul;
-
-    while(elemPopul!=NULL&&qualite(elemPopul)>=tselect)
+void afficherPop (Population *popu)
+{
+    int i = 1;
+    if(popu == NULL)
     {
-        elMemoire->indiv=elemPopul->indiv;
-        elementPopul elMemoireSuivant;
+        exit(EXIT_FAILURE);
+    }
+    printf("\n\n\t\tPopulation : \n");
+    IndivPop *actuel = malloc(sizeof(IndivPop));
+    actuel = popu ->premier;
+
+    while(actuel != NULL)
+    {
+        printf("\t\tIndividu %d : qualite : %f, valeur : %d \n",i, actuel->qualite, actuel->valeur);
+        actuel = actuel -> suivant;
+        i++;
+    };
+}
+
+void suppressionTetePop(Population *liste)
+{
+    if (liste == NULL)
+    {
+        exit(EXIT_FAILURE);
     }
 
-
-    return popul;
+    if (liste->premier != NULL)
+    {
+        IndivPop *aSupprimer = liste->premier;
+        liste->premier = liste->premier->suivant;
+        free(aSupprimer);
+    }
 }
