@@ -5,7 +5,7 @@
 #include "constante.h"
 
 
-void SuppressionElePop(Population *Pop, IndivPop *adresse)
+void SuppressionElePop(Population *Pop, IndivPop *adresse) //supprime un element d'une population à une adresse donnée
 {
     IndivPop *element = malloc(sizeof(IndivPop));
     IndivPop *tampon = malloc(sizeof(IndivPop));
@@ -29,7 +29,7 @@ void SuppressionElePop(Population *Pop, IndivPop *adresse)
     }
 }
 
-void ajouterFinPop (Population *maPop, double nvNombre,int val, Individu *adresse)
+void insertQueuePop(Population *maPop, double nvNombre,int val, Individu *adresse) //ajoute un element à la queue d'une population d'individus
 {
     IndivPop *nouveau = malloc(sizeof(*nouveau));
     IndivPop *parcourtListe = malloc(sizeof(*parcourtListe));
@@ -53,7 +53,7 @@ void ajouterFinPop (Population *maPop, double nvNombre,int val, Individu *adress
     nouveau ->suivant = NULL;
 }
 
-Population* selection (Population *individu)
+Population* selection (Population *individu) //fonction de selection gardant un taux des meilleurs individus d'une population et les dupliquanr pour completer
 {
    int nombreSelection = (int)(((rand()%((int)((tselectMax-tselectMin)*100)))/100.+tselectMin)*taillePop(individu));
 
@@ -83,7 +83,7 @@ Population* selection (Population *individu)
         {
             SuppressionElePop(individu,element);
         }else{
-            ajouterFinPop(individuSubstitution,element->qualite,element->valeur,element->Personne);
+            insertQueuePop(individuSubstitution,element->qualite,element->valeur,element->Personne);
             nombreSelection--;
         }
         element = element->suivant;
@@ -98,7 +98,7 @@ Population* selection (Population *individu)
         eleLS = eleLS ->suivant;
     for(i = newTaille; i < Taille; i++)
     {
-        ajouterFinPop(individu,eleLS->qualite, eleLS->valeur,eleLS->Personne);
+        insertQueuePop(individu,eleLS->qualite, eleLS->valeur,eleLS->Personne);
         eleLS = eleLS ->suivant;
         if(eleLS == NULL)
         {
@@ -111,7 +111,7 @@ Population* selection (Population *individu)
 }
 
 
-IndivPop *adresseQueue(IndivPop *actuel)
+IndivPop *adresseQueue(IndivPop *actuel) //renvoie l'adresse de la queue d'une population
 {
     while (actuel != NULL && actuel->suivant != NULL)
         actuel = actuel->suivant;
@@ -182,7 +182,7 @@ IndivPop *quickSortRecur(IndivPop *tete, IndivPop *fin) //fonction permettant la
     return nouvTete;
 }
 
-void quickSort(Population **adresse)
+void quickSort(Population **adresse) //lance le tri par quicksort
 {
 
     (*adresse) = quickSortRecur(*adresse,adresseQueue(*adresse));
