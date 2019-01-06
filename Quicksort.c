@@ -32,28 +32,35 @@ Population* croisagePopulation (Population *popu)
     int nbAlea1, nbAlea2, i;
 
     Population *newPop = malloc(sizeof(Population));
-    newPop->premier=NULL;
+    IndivPop *indivNewPop = malloc(sizeof(IndivPop));
+
+    newPop ->premier = indivNewPop;
+    indivNewPop ->suivant = NULL;
+    indivNewPop ->Personne = NULL;
+    indivNewPop ->qualite = 0;
+    indivNewPop ->valeur = 0;
 
     for(i = 0; i < getTaillePop(popu);i++)
     {
-        nbAlea1 = rand()%getTaillePop(popu)+1;
+        printf("%d",i);
+        nbAlea1 = rand()%getTaillePop(popu);
         do
         {
-            nbAlea2 = rand()%getTaillePop(popu)+1;
-        }while(nbAlea1 == nbAlea2);
-
-        printf("%d",popu);
+            nbAlea2 = rand()%getTaillePop(popu);
+        }
+        while(nbAlea1 == nbAlea2);
 
         IndivPop *parent1 = lecturePop(popu,nbAlea1);
         IndivPop *parent2 = lecturePop(popu,nbAlea2);
 
-        printf("lect fini");
-        Liste *enfant = croisageListe(parent1->Personne,parent2->Personne);
-        printf("croisage list");
+        Individu *enfant = croisageListe(parent1->Personne,parent2->Personne);
+
         int valeurEnfant = decodageListe(enfant);
+
+        printf("s");
         ajouterFinPop(newPop,qualiteIndiv(valeurEnfant),valeurEnfant,enfant);
     }
-
+    suppressionTetePop(newPop);
     return newPop;
 }
 
@@ -83,7 +90,6 @@ void SuppressionElePop(Population *Pop, IndivPop *adresse)
 
 int getTaillePop(Population *liste)
 {
-    printf("\nget pop\n");
     IndivPop *element = malloc(sizeof(IndivPop));
     element = liste->premier;
     int n = 0;

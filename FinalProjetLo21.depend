@@ -31,22 +31,23 @@
 
 1546264872 c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\quicksort.h
 
-1546747386 source:c:\program files\git\lo21projet\individu.c
+1546789318 source:c:\program files\git\lo21projet\individu.c
 	<stdio.h>
 	<stdlib.h>
 	"Individu.h"
 	<math.h>
 	"constante.h"
 
-1546211004 c:\program files\git\lo21projet\individu.h
+1546789257 c:\program files\git\lo21projet\individu.h
 
-1546784566 source:c:\program files\git\lo21projet\main.c
+1546789583 source:c:\program files\git\lo21projet\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"Individu.h"
 	"Population.h"
 	"quicksort.h"
+	"constante.h"
 
 1546743090 c:\program files\git\lo21projet\population.h
 	"Individu.h"
@@ -57,7 +58,7 @@
 	"population.h"
 	<time.h>
 
-1546785106 source:c:\program files\git\lo21projet\quicksort.c
+1546788398 source:c:\program files\git\lo21projet\quicksort.c
 	"Quicksort.h"
 	<stdio.h>
 	<stdlib.h>
@@ -67,5 +68,5 @@
 1546784170 c:\program files\git\lo21projet\quicksort.h
 	"Population.h"
 
-1546747203 c:\program files\git\lo21projet\constante.h
+1546789553 c:\program files\git\lo21projet\constante.h
 

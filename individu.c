@@ -53,20 +53,20 @@ void ajoutDebut(Liste *liste, int nvNombre)
 }
 */
 
-void afficherListe (Liste *liste, int nb)
+void afficherListe (Liste *liste)
 {
     if(liste == NULL)
     {
         exit(EXIT_FAILURE);
     }
-    printf("\tIndividu %d : ",nb);
+    printf("\tIndividu : ");
     Individu *actuel = liste -> premier;
     while(actuel != NULL)
     {
         printf("%d -> ", actuel -> bits);
         actuel = actuel -> suivant;
     }
-       printf("NULL\n");
+    printf("NULL\n");
 }
 
 /*void supprimerQueue (Liste *liste)

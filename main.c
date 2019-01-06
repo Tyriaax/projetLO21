@@ -4,6 +4,7 @@
 #include "Individu.h"
 #include "Population.h"
 #include "quicksort.h"
+#include "constante.h"
 
 int main()
 {
@@ -11,11 +12,18 @@ int main()
 
     printf("\t\t\t\t\tALGORITHME GENETIQUE ! \n");
 
-    Population *maPop2 = creationPop();
-    afficherPop(maPop2);
-    quickSort(maPop2);
-    t_Select(maPop2);
-    afficherPop(maPop2);
+    Population *maPop = creationPop();
+
+    int nGen = nGenMin+rand()%(nGenMax-nGenMin), i;
+
+    for(i=0;i<nGen;i++)
+    {
+        maPop=croisagePopulation(maPop);
+        quickSort(maPop);
+        t_Select(maPop);
+    }
+
+    afficherListe(maPop->premier->Personne);
 
     return 0;
 }

@@ -17,7 +17,7 @@ struct Liste
 
 Liste* creation_indiv();
 void ajoutDebut(Liste *liste, int nvNombre);
-void afficherListe (Liste *liste, int nb);
+void afficherListe (Liste *liste);
 void supprimerQueue (Liste *liste);
 int decodageListe (Liste *liste );
 double qualiteIndiv (int valIndiv);
