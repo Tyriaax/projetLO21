@@ -9,7 +9,7 @@ Population* creationPop(void)
     IndivPop *elementPop = malloc(sizeof(IndivPop));
     IndivPop *elementPop1 = malloc(sizeof(IndivPop));
 
-    int taillePopulation = 5;//rand()%(201 - 20) + 20;
+    int taillePopulation = 10;//rand()%(201 - 20) + 20;
 
     if(listePop == NULL || elementPop == NULL || elementPop1 == NULL)
     {

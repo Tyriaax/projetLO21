@@ -2,13 +2,12 @@
 #include <stdlib.h>
 #include "Individu.h"
 #include <math.h>
+#include "constante.h"
 
 Liste* creation_indiv()
 {
     Liste *liste = malloc(sizeof(*liste));
     Individu *element = malloc(sizeof(*element));
-
-    int longIndiv = 8;
 
     if(liste == NULL || element == NULL)
     {
@@ -123,7 +122,6 @@ int decodageListe (Liste *liste ) //val de l'indiv
 
 Liste* croisageListe (Liste *parent1, Liste *parent2)
 {
-    int longIndiv = 8;
     float pCroise = 0.5;
 
     Liste *listeEnfant = malloc(sizeof(*listeEnfant));
@@ -163,7 +161,7 @@ Liste* croisageListe (Liste *parent1, Liste *parent2)
 
 double qualiteIndiv (int valIndiv)
 {
-    double resultat = 0, X = 0, B = 1, A = -1, longIndiv = 8;
+    double resultat = 0, X = 0, B = 1, A = -1;
 
     X = ((valIndiv)/(pow(2,longIndiv))) * (B - A) + A;
 

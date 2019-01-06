@@ -2,6 +2,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "population.h"
+#include "constante.h"
+
+IndivPop* lecturePop(Population *popu, int nombre)
+{
+    if(popu==NULL)
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    IndivPop *elem = popu->premier;
+
+    int i;
+    for(i=0;i<nombre;i++)
+    {
+        if(elem==NULL)
+        {
+            exit(EXIT_FAILURE);
+        }
+
+        elem = elem->suivant;
+    }
+
+    return elem;
+}
+
+Population* croisagePopulation (Population *popu)
+{
+    int nbAlea1, nbAlea2, i;
+
+    Population *newPop = malloc(sizeof(Population));
+    newPop->premier=NULL;
+
+    for(i = 0; i < getTaillePop(popu);i++)
+    {
+        nbAlea1 = rand()%getTaillePop(popu)+1;
+        do
+        {
+            nbAlea2 = rand()%getTaillePop(popu)+1;
+        }while(nbAlea1 == nbAlea2);
+
+        printf("%d",popu);
+
+        IndivPop *parent1 = lecturePop(popu,nbAlea1);
+        IndivPop *parent2 = lecturePop(popu,nbAlea2);
+
+        printf("lect fini");
+        Liste *enfant = croisageListe(parent1->Personne,parent2->Personne);
+        printf("croisage list");
+        int valeurEnfant = decodageListe(enfant);
+        ajouterFinPop(newPop,qualiteIndiv(valeurEnfant),valeurEnfant,enfant);
+    }
+
+    return newPop;
+}
 
 void SuppressionElePop(Population *Pop, IndivPop *adresse)
 {
@@ -29,6 +83,7 @@ void SuppressionElePop(Population *Pop, IndivPop *adresse)
 
 int getTaillePop(Population *liste)
 {
+    printf("\nget pop\n");
     IndivPop *element = malloc(sizeof(IndivPop));
     element = liste->premier;
     int n = 0;
@@ -40,7 +95,7 @@ int getTaillePop(Population *liste)
     return n;
 }
 
-void ajouterFinPop (Population *maPop, double nvNombre)
+void ajouterFinPop (Population *maPop, double nvNombre,int val, Liste *adresse)
 {
     IndivPop *nouveau = malloc(sizeof(*nouveau));
     IndivPop *parcourtListe = malloc(sizeof(*parcourtListe));
@@ -58,57 +113,70 @@ void ajouterFinPop (Population *maPop, double nvNombre)
     }
 
     nouveau ->qualite = nvNombre;
+    nouveau ->valeur = val;
+    nouveau ->Personne = adresse;
     parcourtListe->suivant = nouveau;
     nouveau ->suivant = NULL;
-
 }
 
-Population* t_Select (Population *liste)
+Population* t_Select (Population *individu)
 {
-   const double tSelect = -0.5;
+   int nombreSelection = (int)(((rand()%((int)((tselectMax-tselectMin)*100)))/100.+tselectMin)*getTaillePop(individu));
+
    IndivPop *element = malloc(sizeof(IndivPop));
 
    Population *listeSubstitution = malloc(sizeof(Population));
    IndivPop *eleLS = malloc(sizeof(IndivPop));
 
-   if (element == NULL || liste == NULL)
+   if (element == NULL || individu == NULL)
    {
        exit(EXIT_FAILURE);
    }
 
-    element = liste->premier;
+    element = individu->premier;
 
     listeSubstitution->premier = eleLS;
     eleLS->suivant = NULL;
-    suppressionTetePop(listeSubstitution);
+    eleLS->Personne = NULL;
+    eleLS->qualite = 0;
+    eleLS->valeur = 0;
 
-      int Taille = getTaillePop(liste);
+    int Taille = getTaillePop(individu);
+    printf("%d",nombreSelection);
 
     while(element != NULL)
     {
-        if((element->qualite) < tSelect )
+        if(nombreSelection <= 0)
         {
-            SuppressionElePop(liste,element);
+            SuppressionElePop(individu,element);
         }else{
-            ajoutDebutPop(listeSubstitution,element->Personne,element->valeur,element->qualite);
+            ajouterFinPop(listeSubstitution,element->qualite,element->valeur,element->Personne);
+            nombreSelection--;
         }
         element = element->suivant;
     }
 
-    int newTaille = getTaillePop(liste);
+    int newTaille = getTaillePop(individu);
 
-    printf("Pop liste substi : ");
-    afficherPop(listeSubstitution);
+    suppressionTetePop(listeSubstitution);
 
     int i;
-    for(i = newTaille; i<Taille; i++)
-    {
-        ajoutDebutPop(liste,eleLS->Personne, eleLS->valeur,eleLS->qualite);
+
         eleLS = eleLS ->suivant;
+    for(i = newTaille; i < Taille; i++)
+    {
+        ajouterFinPop(individu,eleLS->qualite, eleLS->valeur,eleLS->Personne);
+        eleLS = eleLS ->suivant;
+        if(eleLS == NULL)
+        {
+            eleLS = listeSubstitution ->premier;
+        }
     }
 
-    return liste;
+
+    return individu;
 }
+
 
 IndivPop *getTail(IndivPop *cur)
 {
