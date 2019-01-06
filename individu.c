@@ -117,7 +117,7 @@ int valeur(Individu *individu ) //donne la valeur d'un individu
 
 double qualite(int valeur) //renvoie la qualité d'un individu en fonction de sa valeur
 {
-    double resultat = 0, X = 0, B = 1, A = -1;
+    double resultat, X;
 
     X = ((valeur)/(pow(2,longIndiv))) * (B - A) + A;
 

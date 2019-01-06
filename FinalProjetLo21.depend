@@ -31,7 +31,7 @@
 
 1546264872 c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\quicksort.h
 
-1546812832 source:c:\program files\git\lo21projet\individu.c
+1546817630 source:c:\program files\git\lo21projet\individu.c
 	<stdio.h>
 	<stdlib.h>
 	"Individu.h"
@@ -72,11 +72,12 @@
 1546816960 c:\program files\git\lo21projet\quicksort.h
 	"Population.h"
 
-1546816054 c:\program files\git\lo21projet\constante.h
+1546817630 c:\program files\git\lo21projet\constante.h
+	<math.h>
 
 1546810184 c:\program files\git\lo21projet\structure.h
 
-1546816118 source:c:\program files\git\lo21projet\croisement.c
+1546817131 source:c:\program files\git\lo21projet\croisement.c
 	<stdio.h>
 	<stdlib.h>
 	"population.h"
