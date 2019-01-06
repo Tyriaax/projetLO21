@@ -31,16 +31,18 @@
 
 1546264872 c:\users\aurélien\informatique\lo21\projetlo21final\finalprojetlo21\quicksort.h
 
-1546789318 source:c:\program files\git\lo21projet\individu.c
+1546812832 source:c:\program files\git\lo21projet\individu.c
 	<stdio.h>
 	<stdlib.h>
 	"Individu.h"
 	<math.h>
 	"constante.h"
+	"structure.h"
 
-1546789257 c:\program files\git\lo21projet\individu.h
+1546812942 c:\program files\git\lo21projet\individu.h
+	"structure.h"
 
-1546789583 source:c:\program files\git\lo21projet\main.c
+1546812837 source:c:\program files\git\lo21projet\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -48,25 +50,40 @@
 	"Population.h"
 	"quicksort.h"
 	"constante.h"
+	"croisement.h"
 
-1546743090 c:\program files\git\lo21projet\population.h
+1546814149 c:\program files\git\lo21projet\population.h
 	"Individu.h"
 
-1546743175 source:c:\program files\git\lo21projet\population.c
+1546814107 source:c:\program files\git\lo21projet\population.c
 	<stdio.h>
 	<stdlib.h>
 	"population.h"
 	<time.h>
+	"constante.h"
 
-1546788398 source:c:\program files\git\lo21projet\quicksort.c
+1546814070 source:c:\program files\git\lo21projet\quicksort.c
 	"Quicksort.h"
 	<stdio.h>
 	<stdlib.h>
 	"population.h"
 	"constante.h"
 
-1546784170 c:\program files\git\lo21projet\quicksort.h
+1546814070 c:\program files\git\lo21projet\quicksort.h
 	"Population.h"
 
-1546789553 c:\program files\git\lo21projet\constante.h
+1546812275 c:\program files\git\lo21projet\constante.h
+
+1546810184 c:\program files\git\lo21projet\structure.h
+
+1546814070 source:c:\program files\git\lo21projet\croisement.c
+	<stdio.h>
+	<stdlib.h>
+	"population.h"
+	"Individu.h"
+	"constante.h"
+	"croisement.h"
+
+1546808351 c:\program files\git\lo21projet\croisement.h
+	"structure.h"
 

@@ -3,26 +3,11 @@
 
 #include "Individu.h"
 
-typedef struct IndivPop IndivPop;
-struct IndivPop
-{
-    Liste *Personne;
-    int valeur;
-    double qualite;
-    IndivPop *suivant;
-};
-
-typedef struct Population Population;
-struct Population
-{
-    IndivPop *premier;
-};
 
 Population* creationPop(void);
-void ajoutDebutPop(Population *, Liste *adresseIndiv, int val, double qual);
-void afficherPop (Population *);
+void insertTetePop(Population *, Individu *, int, double );
+void affichagePopulation(Population *);
 void suppressionTetePop(Population *);
-
-
+int taillePop(Population *);
 
 #endif // POPULATION_H_INCLUDED

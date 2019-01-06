@@ -3,64 +3,55 @@
 #include "Individu.h"
 #include <math.h>
 #include "constante.h"
+#include "structure.h"
 
-Liste* creation_indiv()
+Individu* creation_indiv_iterative() //Creation et initialisation d'un individu de maniere iterative
 {
-    Liste *liste = malloc(sizeof(*liste));
-    Individu *element = malloc(sizeof(*element));
+    Individu *individu = malloc(sizeof(*individu));
+    elemIndiv *element = malloc(sizeof(*element));
 
-    if(liste == NULL || element == NULL)
+    if(individu == NULL || element == NULL)
     {
         exit(EXIT_FAILURE);
     }
 
     element -> bits = rand()%2;
     element -> suivant = NULL;
-    liste -> premier = element;
+    individu -> premier = element;
 
     int i;
     for(i = 0; i <= longIndiv - 2 ; i ++)
     {
         int nbAleatoire = rand()%2;
-        ajoutDebut(liste, nbAleatoire);
+        insertTeteIndiv(individu, nbAleatoire);
     }
 
-    return liste;
+    return individu;
 }
 
-void ajoutDebut(Liste *liste, int nvNombre)
+void insertTeteIndiv(Individu *individu, int nvNombre) //Insere une valeur à la tête d'un individu
 {
-    Individu *nouveau = malloc(sizeof(*nouveau));
-    if(liste == NULL || nouveau == NULL)
+    elemIndiv *nouveau = malloc(sizeof(*nouveau));
+    if(individu == NULL || nouveau == NULL)
     {
         exit(EXIT_FAILURE);
     }
 
     nouveau -> bits = nvNombre;
-    nouveau-> suivant = liste->premier;
-    liste -> premier = nouveau;
+    nouveau-> suivant = individu->premier;
+    individu -> premier = nouveau;
 }
 
 
-/* void creationIndivRec(Liste *liste) // Initialiser liste de bis (itérative)
-{
-    if(liste == NULL)
-    {
-        Liste *new = malloc(sizeof(Liste))
-    }else{
-        return
-    }
-}
-*/
 
-void afficherListe (Liste *liste)
+void affichage(Individu *individu) //affiche la liste de bits chainée d'un individu
 {
-    if(liste == NULL)
+    if(individu == NULL)
     {
         exit(EXIT_FAILURE);
     }
     printf("\tIndividu : ");
-    Individu *actuel = liste -> premier;
+    elemIndiv *actuel = individu -> premier;
     while(actuel != NULL)
     {
         printf("%d -> ", actuel -> bits);
@@ -69,43 +60,49 @@ void afficherListe (Liste *liste)
     printf("NULL\n");
 }
 
-/*void supprimerQueue (Liste *liste)
+//Creation et initialisation d'un individu de maniere iterative
+Individu* creationIndivRec(Individu *individu, int i, int randomValue)
 {
-    if(liste == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
 
-    if(liste -> premier == NULL) // a changer
-    {
-        free(liste);
-        exit(EXIT_FAILURE);
-    }
+     elemIndiv *element = malloc(sizeof(elemIndiv));
+     element = individu ->premier;
 
-    Individu *L1 = liste -> premier;
-    Individu *L2 = liste -> premier -> suivant;
+     if( i == longIndiv)
+     {
+            return individu;
+     }else{
 
-    while(L2 -> suivant != NULL)
-    {
-        L2 = L2 -> suivant;
-        L1 = L1 -> suivant;
-    }
+            insertTeteIndiv(individu,rand()%2);
 
-    free(L2);
-    L1 -> suivant = NULL;
+            return creationIndivRec(individu,i + 1,rand()%2);
+     }
 }
-*/
 
-int decodageListe (Liste *liste ) //val de l'indiv
+Individu* iniIndivRec(void) //initialisation
+{
+    Individu *individu = malloc(sizeof(Individu));
+    elemIndiv *element = malloc(sizeof(*element));
+
+    element -> bits = rand()%2;
+    element -> suivant = NULL;
+    individu -> premier = element;
+
+    individu = creationIndivRec(individu,0,rand()%2);
+
+    return individu;
+
+}
+
+int valeur(Individu *individu ) //donne la valeur d'un individu
 {
     int valeur = 0, i = 7;
 
-    if(liste == NULL)
+    if(individu == NULL)
     {
         exit(EXIT_FAILURE);
     }
 
-    Individu *actuel = liste -> premier;
+    elemIndiv *actuel = individu -> premier;
     while(actuel != NULL || i > 0)
     {
         valeur = valeur + (actuel -> bits) * pow(2, i);
@@ -113,100 +110,57 @@ int decodageListe (Liste *liste ) //val de l'indiv
         i--;
     }
 
-   // printf("\tValeur : %d | ", valeur);
-
     return valeur;
 
     free(actuel);
 }
 
-Liste* croisageListe (Liste *parent1, Liste *parent2)
-{
-    float pCroise = 0.5;
-
-    Liste *listeEnfant = malloc(sizeof(*listeEnfant));
-    Individu *element = malloc(sizeof(*element));
-
-    element->bits = 0;
-    element -> suivant = NULL;
-    listeEnfant -> premier = element;
-
-    Individu *actuel1 = parent1 -> premier;
-    Individu *actuel2 = parent2 -> premier;
-
-    if(parent1 == NULL || parent2 == NULL || listeEnfant == NULL || element == NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
-
-    int i;
-    for(i = 0; i<= longIndiv -1; i++)
-    {
-        int nbAlea = rand()%2;
-
-        if( nbAlea < pCroise)
-        {
-            ajouterFin(listeEnfant,actuel1->bits);
-        }else{
-            ajouterFin(listeEnfant,actuel2->bits);
-        }
-        actuel1 = actuel1 ->suivant;
-        actuel2 = actuel2 ->suivant;
-    }
-
-    suppressionTete(listeEnfant);
-
-    return listeEnfant;
-}
-
-double qualiteIndiv (int valIndiv)
+double qualite(int valeur) //renvoie la qualité d'un individu en fonction de sa valeur
 {
     double resultat = 0, X = 0, B = 1, A = -1;
 
-    X = ((valIndiv)/(pow(2,longIndiv))) * (B - A) + A;
+    X = ((valeur)/(pow(2,longIndiv))) * (B - A) + A;
 
     resultat = -1 * pow(X,2);
-
-    //printf("Qualite : %f |\n", resultat);
 
     return resultat;
 }
 
-void ajouterFin (Liste *maListe, int nvNombre)
+void insertQueueIndiv(Individu *individu, int nvBit) //insertion d'un bit à la queue d'un individu
 {
-    Individu *nouveau = malloc(sizeof(*nouveau));
-    Individu *parcourtListe = malloc(sizeof(parcourtListe));
+    elemIndiv *nouveau = malloc(sizeof(elemIndiv));
+    elemIndiv *elem = malloc(sizeof(elemIndiv));
 
-    if(maListe == NULL || nouveau == NULL || parcourtListe == NULL)
+    if(individu== NULL || nouveau == NULL || elem == NULL)
     {
         exit(EXIT_FAILURE);
     }
 
-    parcourtListe = maListe ->premier;
+    elem = individu ->premier;
 
-    while(parcourtListe ->suivant != NULL)
+    while(elem ->suivant != NULL)
     {
-        parcourtListe = parcourtListe ->suivant;
+        elem = elem ->suivant;
     }
 
-    nouveau ->bits = nvNombre;
-    parcourtListe->suivant = nouveau;
+    nouveau ->bits = nvBit;
+    elem->suivant = nouveau;
     nouveau ->suivant = NULL;
 
 }
 
-void suppressionTete(Liste *liste)
+void suppressionTete(Individu *individu) //fonction de suppression du premier element d'un individu
 {
-    if (liste == NULL)
+    if (individu == NULL)
     {
         exit(EXIT_FAILURE);
     }
 
-    if (liste->premier != NULL)
+    if (individu->premier != NULL)
     {
-        Individu *aSupprimer = liste->premier;
-        liste->premier = liste->premier->suivant;
-        free(aSupprimer);
+        elemIndiv *adresseTampon = individu->premier;
+        individu->premier = individu->premier->suivant;
+        free(adresseTampon);
     }
 }
 

@@ -2,57 +2,57 @@
 #include <stdlib.h>
 #include "population.h"
 #include <time.h>
+#include "constante.h"
 
-Population* creationPop(void)
+Population* creationPop(void) //initialise une population
 {
-    Population *listePop = malloc(sizeof(*listePop)); //contient l'adresse du 1er indiv de la pop
+    Population *individuPop = malloc(sizeof(*individuPop));
     IndivPop *elementPop = malloc(sizeof(IndivPop));
     IndivPop *elementPop1 = malloc(sizeof(IndivPop));
 
-    int taillePopulation = 10;//rand()%(201 - 20) + 20;
+    int taillePopulation = rand()%(taillePopulationMax - taillePopulationMin) + taillePopulationMin; //taille de la population aléatoire entre les bornes
 
-    if(listePop == NULL || elementPop == NULL || elementPop1 == NULL)
+    if(individuPop == NULL || elementPop == NULL || elementPop1 == NULL)
     {
         exit(EXIT_FAILURE);
     }
 
-    elementPop->Personne = creation_indiv();
-   // afficherListe(elementPop->Personne,1);
-    elementPop->valeur = decodageListe(elementPop->Personne);
-    elementPop->qualite = qualiteIndiv(elementPop ->valeur);
+    elementPop->Personne = creation_indiv_iterative();
+    elementPop->valeur = valeur(elementPop->Personne);
+    elementPop->qualite = qualite(elementPop ->valeur);
     elementPop -> suivant = NULL;
-    listePop -> premier = elementPop;
-     // printf("\td : qualite : %f, valeur : %d \n", elementPop->qualite, elementPop->valeur);
+    individuPop -> premier = elementPop;
+
     int i;
 
-    for(i = 1; i < taillePopulation; i++)
+    for(i = 1; i < taillePopulation; i++) //boucle pour initialise chaque individu de la population
     {
-        elementPop1->Personne = creation_indiv();
-       // afficherListe(elementPop1->Personne, i + 1);
-        elementPop1 ->valeur = decodageListe(elementPop1->Personne);
-        elementPop1->qualite = qualiteIndiv(elementPop1 ->valeur);
-       // printf("\td : qualite : %f, valeur : %d \n", elementPop1->qualite, elementPop1->valeur);
-        ajoutDebutPop(listePop, elementPop1->Personne, elementPop1 ->valeur, elementPop1->qualite);
+        elementPop1->Personne = creation_indiv_iterative();
+
+        elementPop1 ->valeur = valeur(elementPop1->Personne);
+        elementPop1->qualite = qualite(elementPop1 ->valeur);
+
+        insertTetePop(individuPop, elementPop1->Personne, elementPop1 ->valeur, elementPop1->qualite);
     }
 
-    return listePop;
+    return individuPop;
 }
 
-void ajoutDebutPop(Population *maPop, Liste *adresseIndiv, int val, double qual)
+void insertTetePop(Population *popu, Individu *adresseIndiv, int valeur, double qualite)
 {
     IndivPop *nouveau = malloc(sizeof(*nouveau));
-    if(maPop == NULL || nouveau == NULL)
+    if(popu == NULL || nouveau == NULL)
     {
         exit(EXIT_FAILURE);
     }
     nouveau-> Personne = adresseIndiv;
-    nouveau->valeur = val;
-    nouveau->qualite = qual;
-    nouveau-> suivant = maPop->premier;
-    maPop-> premier = nouveau;
+    nouveau->valeur = valeur;
+    nouveau->qualite = qualite;
+    nouveau-> suivant = popu->premier;
+    popu-> premier = nouveau;
 }
 
-void afficherPop (Population *popu)
+void affichagePopulation(Population *popu)
 {
     int i = 1;
     if(popu == NULL)
@@ -71,17 +71,30 @@ void afficherPop (Population *popu)
     };
 }
 
-void suppressionTetePop(Population *liste)
+void suppressionTetePop(Population *individu)
 {
-    if (liste == NULL)
+    if (individu == NULL)
     {
         exit(EXIT_FAILURE);
     }
 
-    if (liste->premier != NULL)
+    if (individu->premier != NULL)
     {
-        IndivPop *aSupprimer = liste->premier;
-        liste->premier = liste->premier->suivant;
-        free(aSupprimer);
+        IndivPop *tampon = individu->premier;
+        individu->premier = individu->premier->suivant;
+        free(tampon);
     }
+}
+
+int taillePop(Population *individu)
+{
+    IndivPop *element = malloc(sizeof(IndivPop));
+    element = individu->premier;
+    int taille = 0;
+    while (element != NULL )
+    {
+        element = element->suivant;
+        taille++;
+    }
+    return taille;
 }

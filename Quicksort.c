@@ -4,104 +4,32 @@
 #include "population.h"
 #include "constante.h"
 
-IndivPop* lecturePop(Population *popu, int nombre)
-{
-    if(popu==NULL)
-    {
-        exit(EXIT_FAILURE);
-    }
-
-    IndivPop *elem = popu->premier;
-
-    int i;
-    for(i=0;i<nombre;i++)
-    {
-        if(elem==NULL)
-        {
-            exit(EXIT_FAILURE);
-        }
-
-        elem = elem->suivant;
-    }
-
-    return elem;
-}
-
-Population* croisagePopulation (Population *popu)
-{
-    int nbAlea1, nbAlea2, i;
-
-    Population *newPop = malloc(sizeof(Population));
-    IndivPop *indivNewPop = malloc(sizeof(IndivPop));
-
-    newPop ->premier = indivNewPop;
-    indivNewPop ->suivant = NULL;
-    indivNewPop ->Personne = NULL;
-    indivNewPop ->qualite = 0;
-    indivNewPop ->valeur = 0;
-
-    for(i = 0; i < getTaillePop(popu);i++)
-    {
-        printf("%d",i);
-        nbAlea1 = rand()%getTaillePop(popu);
-        do
-        {
-            nbAlea2 = rand()%getTaillePop(popu);
-        }
-        while(nbAlea1 == nbAlea2);
-
-        IndivPop *parent1 = lecturePop(popu,nbAlea1);
-        IndivPop *parent2 = lecturePop(popu,nbAlea2);
-
-        Individu *enfant = croisageListe(parent1->Personne,parent2->Personne);
-
-        int valeurEnfant = decodageListe(enfant);
-
-        printf("s");
-        ajouterFinPop(newPop,qualiteIndiv(valeurEnfant),valeurEnfant,enfant);
-    }
-    suppressionTetePop(newPop);
-    return newPop;
-}
 
 void SuppressionElePop(Population *Pop, IndivPop *adresse)
 {
     IndivPop *element = malloc(sizeof(IndivPop));
-    IndivPop *aSupprimer = malloc(sizeof(IndivPop));
+    IndivPop *tampon = malloc(sizeof(IndivPop));
 
     element = Pop->premier;
-    aSupprimer = Pop->premier->suivant;
+    tampon = Pop->premier->suivant;
 
-    while(aSupprimer != NULL)
+    while(tampon != NULL)
     {
         if(adresse == Pop->premier)
         {
             suppressionTetePop(Pop);
         }
-        if(aSupprimer == adresse)
+        if(tampon == adresse)
         {
-            element->suivant = aSupprimer->suivant;
-            free(aSupprimer);
+            element->suivant = tampon->suivant;
+            free(tampon);
         }
         element = element ->suivant;
-        aSupprimer = aSupprimer ->suivant;
+        tampon = tampon ->suivant;
     }
 }
 
-int getTaillePop(Population *liste)
-{
-    IndivPop *element = malloc(sizeof(IndivPop));
-    element = liste->premier;
-    int n = 0;
-    while (element != NULL )
-    {
-        element = element->suivant;
-        n++;
-    }
-    return n;
-}
-
-void ajouterFinPop (Population *maPop, double nvNombre,int val, Liste *adresse)
+void ajouterFinPop (Population *maPop, double nvNombre,int val, Individu *adresse)
 {
     IndivPop *nouveau = malloc(sizeof(*nouveau));
     IndivPop *parcourtListe = malloc(sizeof(*parcourtListe));
@@ -125,13 +53,13 @@ void ajouterFinPop (Population *maPop, double nvNombre,int val, Liste *adresse)
     nouveau ->suivant = NULL;
 }
 
-Population* t_Select (Population *individu)
+Population* selection (Population *individu)
 {
-   int nombreSelection = (int)(((rand()%((int)((tselectMax-tselectMin)*100)))/100.+tselectMin)*getTaillePop(individu));
+   int nombreSelection = (int)(((rand()%((int)((tselectMax-tselectMin)*100)))/100.+tselectMin)*taillePop(individu));
 
    IndivPop *element = malloc(sizeof(IndivPop));
 
-   Population *listeSubstitution = malloc(sizeof(Population));
+   Population *individuSubstitution = malloc(sizeof(Population));
    IndivPop *eleLS = malloc(sizeof(IndivPop));
 
    if (element == NULL || individu == NULL)
@@ -141,13 +69,13 @@ Population* t_Select (Population *individu)
 
     element = individu->premier;
 
-    listeSubstitution->premier = eleLS;
+    individuSubstitution->premier = eleLS;
     eleLS->suivant = NULL;
     eleLS->Personne = NULL;
     eleLS->qualite = 0;
     eleLS->valeur = 0;
 
-    int Taille = getTaillePop(individu);
+    int Taille = taillePop(individu);
     printf("%d",nombreSelection);
 
     while(element != NULL)
@@ -156,15 +84,15 @@ Population* t_Select (Population *individu)
         {
             SuppressionElePop(individu,element);
         }else{
-            ajouterFinPop(listeSubstitution,element->qualite,element->valeur,element->Personne);
+            ajouterFinPop(individuSubstitution,element->qualite,element->valeur,element->Personne);
             nombreSelection--;
         }
         element = element->suivant;
     }
 
-    int newTaille = getTaillePop(individu);
+    int newTaille = taillePop(individu);
 
-    suppressionTetePop(listeSubstitution);
+    suppressionTetePop(individuSubstitution);
 
     int i;
 
@@ -175,7 +103,7 @@ Population* t_Select (Population *individu)
         eleLS = eleLS ->suivant;
         if(eleLS == NULL)
         {
-            eleLS = listeSubstitution ->premier;
+            eleLS = individuSubstitution ->premier;
         }
     }
 

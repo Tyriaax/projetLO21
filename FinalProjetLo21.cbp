@@ -42,10 +42,16 @@
 		<Unit filename="Quicksort.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="constante.h" />
+		<Unit filename="croisement.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="croisement.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="quicksort.h" />
+		<Unit filename="structure.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

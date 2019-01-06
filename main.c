@@ -5,25 +5,27 @@
 #include "Population.h"
 #include "quicksort.h"
 #include "constante.h"
+#include "croisement.h"
 
 int main()
 {
     srand(time(0));
 
-    printf("\t\t\t\t\tALGORITHME GENETIQUE ! \n");
+    printf("-------------------\nPROJET LO21\n\n");
 
-    Population *maPop = creationPop();
+    Population *popul = creationPop();
 
     int nGen = nGenMin+rand()%(nGenMax-nGenMin), i;
 
     for(i=0;i<nGen;i++)
     {
-        maPop=croisagePopulation(maPop);
-        quickSort(maPop);
-        t_Select(maPop);
+        popul=croisagePopulation(popul);
+        quickSort(popul);
+        selection(popul);
     }
 
-    afficherListe(maPop->premier->Personne);
+    affichage(popul->premier->Personne);
+    printf("\nvaleur : %d\nqualite : %f\n",popul->premier->valeur,popul->premier->qualite);
 
     return 0;
 }

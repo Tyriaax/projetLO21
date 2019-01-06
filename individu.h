@@ -1,29 +1,15 @@
 #ifndef INDIVIDU_H_INCLUDED
 #define INDIVIDU_H_INCLUDED
-
-typedef struct Individu Individu;
-struct Individu
-{
-    int bits;
-    Individu *suivant;
-};
-
-typedef struct Liste Liste;
-struct Liste
-{
-    Individu *premier;
-};
-
-
-Liste* creation_indiv();
-void ajoutDebut(Liste *liste, int nvNombre);
-void afficherListe (Liste *liste);
-void supprimerQueue (Liste *liste);
-int decodageListe (Liste *liste );
-double qualiteIndiv (int valIndiv);
-Liste* croisageListe (Liste *parent1, Liste *parent2);
-void ajouterFin (Liste *maListe, int nvNombre);
-void suppressionTete(Liste *liste);
+#include "structure.h"
+Individu* creation_indiv_iterative();
+void insertTeteIndiv(Individu *individu, int nvNombre);
+void afficherListe (Individu *individu);
+void supprimerQueue (Individu *individu);
+int valeur(Individu *individu );
+double qualite(int valIndiv);
+Individu* croisageListe (Individu *parent1, Individu *parent2);
+void insertQueueIndiv(Individu *maListe, int nvNombre);
+void suppressionTete(Individu *individu);
 
 
 #endif // INDIVIDU_H_INCLUDED
