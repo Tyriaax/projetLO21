@@ -76,7 +76,6 @@ Population* selection (Population *individu)
     eleLS->valeur = 0;
 
     int Taille = taillePop(individu);
-    printf("%d",nombreSelection);
 
     while(element != NULL)
     {
@@ -112,80 +111,79 @@ Population* selection (Population *individu)
 }
 
 
-IndivPop *getTail(IndivPop *cur)
+IndivPop *adresseQueue(IndivPop *actuel)
 {
-    while (cur != NULL && cur->suivant != NULL)
-        cur = cur->suivant;
-    return cur;
+    while (actuel != NULL && actuel->suivant != NULL)
+        actuel = actuel->suivant;
+    return actuel;
 }
 
-IndivPop* Diviser(IndivPop *head, IndivPop *end, IndivPop **newHead, IndivPop **newEnd)
+IndivPop* diviser(IndivPop *tete, IndivPop *fin, IndivPop **nouvTete, IndivPop **nouvFin) //sépare la population autour du pivot
 {
-    IndivPop *pivot = end;
-    IndivPop *prev =NULL, *cur = NULL, *tail = NULL;
+    IndivPop *pivot = fin;
+    IndivPop *precedent =NULL, *actuel = NULL, *tail = NULL;
 
-    cur = head, tail = end;
+    actuel = tete, tail = fin;
 
-    while(cur != pivot)
+    while(actuel != pivot)
     {
-        printf("%f      %f\n", cur->qualite, pivot->qualite);
-        if(cur->qualite > pivot->qualite)
+        if(actuel->qualite > pivot->qualite)
         {
-            if(((*newHead)) == NULL)
+            if(((*nouvTete)) == NULL)
             {
-                (*newHead) = cur;
+                (*nouvTete) = actuel;
             }
 
-            prev = cur;
-            cur = cur->suivant;
+            precedent = actuel;
+            actuel = actuel->suivant;
 
         }else{
-            if(prev)
-                prev->suivant = cur ->suivant;
-            IndivPop *tmp = cur-> suivant;
-            cur->suivant =NULL;
-            tail->suivant = cur;
-            tail = cur;
-            cur = tmp;
+            if(precedent)
+                precedent->suivant = actuel ->suivant;
+            IndivPop *tampon = actuel-> suivant;
+            actuel->suivant =NULL;
+            tail->suivant = actuel;
+            tail = actuel;
+            actuel = tampon;
         }
     }
 
-    if((*newHead) == NULL)
-        (*newHead) = pivot;
+    if((*nouvTete) == NULL)
+        (*nouvTete) = pivot;
 
-    (*newEnd) = tail;
+    (*nouvFin) = tail;
 
     return pivot;
 }
 
-IndivPop *quickSortRecur(IndivPop *head, IndivPop *end)
+IndivPop *quickSortRecur(IndivPop *tete, IndivPop *fin) //fonction permettant la séparation de la population autour d'un pivot récurrente
 {
-    if(head == NULL || head == end)
-        return head;
+    if(tete == NULL || tete == fin)
+        return tete;
 
-    IndivPop *newHead = NULL, *newEnd = NULL;
+    IndivPop *nouvTete = NULL, *nouvFin = NULL;
 
-    IndivPop *pivot = Diviser(head, end, &newHead,&newEnd);
+    IndivPop *pivot = diviser(tete, fin, &nouvTete,&nouvFin);
 
-    if(newHead != pivot)
+    if(nouvTete != pivot)
     {
-        IndivPop *tmp = newHead;
-        while(tmp->suivant != pivot)
+        IndivPop *tampon = nouvTete;
+        while(tampon->suivant != pivot)
         {
-            tmp = tmp->suivant;
+            tampon = tampon->suivant;
         }
-        tmp->suivant = NULL;
-        newHead = quickSortRecur(newHead,tmp);
-        tmp = getTail(newHead);
-        tmp->suivant = pivot;
+        tampon->suivant = NULL;
+        nouvTete = quickSortRecur(nouvTete,tampon);
+        tampon = adresseQueue(nouvTete);
+        tampon->suivant = pivot;
     }
-    pivot ->suivant = quickSortRecur(pivot->suivant, newEnd);
+    pivot ->suivant = quickSortRecur(pivot->suivant, nouvFin);
 
-    return newHead;
+    return nouvTete;
 }
 
-void quickSort(Population **headRef)
+void quickSort(Population **adresse)
 {
 
-    (*headRef) = quickSortRecur(*headRef,getTail(*headRef));
+    (*adresse) = quickSortRecur(*adresse,adresseQueue(*adresse));
 }

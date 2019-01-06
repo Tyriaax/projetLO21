@@ -6,8 +6,8 @@ void SuppressionElePop(Population *, IndivPop *);
 int taillePop(Population *);
 void ajouterFinPop (Population *maPop, double nvNombre,int val, Individu *adresse);
 Population* selection (Population *);
-IndivPop *getTail(IndivPop *);
-IndivPop* Diviser(IndivPop *, IndivPop *, IndivPop **, IndivPop **);
+IndivPop *adresseQueue(IndivPop *);
+IndivPop* diviser(IndivPop *, IndivPop *, IndivPop **, IndivPop **);
 IndivPop *quickSortRecur(IndivPop *, IndivPop *);
 void quickSort(Population **);
 

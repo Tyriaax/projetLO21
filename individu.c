@@ -121,7 +121,7 @@ double qualite(int valeur) //renvoie la qualité d'un individu en fonction de sa 
 
     X = ((valeur)/(pow(2,longIndiv))) * (B - A) + A;
 
-    resultat = -1 * pow(X,2);
+    resultat = -1 * cos(X);
 
     return resultat;
 }

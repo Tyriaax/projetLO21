@@ -5,7 +5,7 @@
 #include "constante.h"
 #include "croisement.h"
 
-Population* croisagePopulation (Population *popu)
+Population* croisagePopulation (Population *popu) //croisage de la population
 {
     int nbAlea1, nbAlea2, i;
 
@@ -20,7 +20,7 @@ Population* croisagePopulation (Population *popu)
 
     for(i = 0; i < taillePop(popu);i++)
     {
-        printf("%d",i);
+
         nbAlea1 = rand()%taillePop(popu);
         do
         {
@@ -41,7 +41,7 @@ Population* croisagePopulation (Population *popu)
     return popu2;
 }
 
-IndivPop* lecturePop(Population *popu, int nombre)
+IndivPop* lecturePop(Population *popu, int nombre) //renvoie l'adresse de l'element contenant un individu à la place demandée
 {
     if(popu==NULL)
     {
@@ -64,10 +64,8 @@ IndivPop* lecturePop(Population *popu, int nombre)
     return elem;
 }
 
-Individu* croisageListe (Individu *parent1, Individu *parent2)
+Individu* croisageListe (Individu *parent1, Individu *parent2) //croisement entre 2 individus avec probabilité
 {
-    float pCroise = 0.5;
-
     Individu *individuEnfant = malloc(sizeof(*individuEnfant));
     elemIndiv *element = malloc(sizeof(*element));
 
