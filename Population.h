@@ -19,9 +19,10 @@ struct Population
 };
 
 Population* creationPop(void);
-void ajoutDebutPop(Population *maPop, Liste *adresseIndiv, int val, double qual);
-void afficherPop (Population *popu);
-void suppressionTetePop(Population *liste);
+void ajoutDebutPop(Population *, Liste *adresseIndiv, int val, double qual);
+void afficherPop (Population *);
+void suppressionTetePop(Population *);
+void ajouterFinPop (Population *, double);
 
 
 #endif // POPULATION_H_INCLUDED

@@ -39,27 +39,29 @@
 
 1546211004 c:\program files\git\lo21projet\individu.h
 
-1546723400 source:c:\program files\git\lo21projet\main.c
+1546736359 source:c:\program files\git\lo21projet\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"Individu.h"
 	"Population.h"
+	"quicksort.h"
 
-1546384288 c:\program files\git\lo21projet\population.h
+1546736848 c:\program files\git\lo21projet\population.h
 	"Individu.h"
 
-1546712480 source:c:\program files\git\lo21projet\population.c
+1546736967 source:c:\program files\git\lo21projet\population.c
 	<stdio.h>
 	<stdlib.h>
 	"population.h"
 	<time.h>
 
-1546730559 source:c:\program files\git\lo21projet\quicksort.c
+1546736285 source:c:\program files\git\lo21projet\quicksort.c
 	"Quicksort.h"
 	<stdio.h>
 	<stdlib.h>
 	"population.h"
 
-1546264872 c:\program files\git\lo21projet\quicksort.h
+1546735222 c:\program files\git\lo21projet\quicksort.h
+	"Population.h"
 
